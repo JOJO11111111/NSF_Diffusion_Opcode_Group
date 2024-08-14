@@ -27,55 +27,14 @@ import datetime
 from tqdm import tqdm
 from pathlib import Path
 from numpy import savetxt
-
-# from src.common.utils import PROJECT_ROOT, MyTimer
 from data.data_module import MyDataModule
 from GANs.GAN.gan_model import GANModel
 
-# from src.visualization.visualization import plot_losses
 
-# logging.getLogger('git').setLevel(logging.ERROR)
-# logging.getLogger('urllib3').setLevel(logging.ERROR)
-# logging.getLogger('matplotlib').setLevel(logging.ERROR)
-# logging.getLogger('tensorflow').setLevel(logging.ERROR)
-# logging.getLogger('h5py').setLevel(logging.ERROR)
-
-# logger = logging.getLogger(__name__)
-# coloredlogs.install(level=logging.DEBUG, logger=logger)
-
-
-# def log_params(cfg: DictConfig) -> None:
-#     # Log parameters
-#     mlflow.log_params(cfg.data.datamodule.datasets.train)
-#     mlflow.log_params(cfg.train.trainer)
-#     for key, params in cfg.model.modelmodule.items():
-#         if key == '_target_' or key == 'critic_param':
-#             continue
-#         mlflow.log_params(params)
-
-#     for key, params in cfg.bert.bertmodule.items():
-#         if key == '_target_':
-#             continue
-#         mlflow.log_params(params)
-
-#     # Log hydra configs
-#     mlflow.log_artifacts(os.path.join(PROJECT_ROOT, 'conf'))
-
-#     # Log python scripts
-#     mlflow.log_artifact(
-#         os.path.join(PROJECT_ROOT, 'src/model/gan_model.py')
-#     )
-#     mlflow.log_artifact(
-#         os.path.join(PROJECT_ROOT, 'src/training/train_gan.py')
-#     )
-#     mlflow.log_artifact(
-#         os.path.join(PROJECT_ROOT, 'src/data/data_module.py')
-#     )
 
 
 def train(model_params, train_params, data_params, make_plot: bool = False) -> None:
     """Generic train loop"""
-    # logger.info('Loading dataset and rescale to [-1, 1] ...')
     print("Loading dataset and rescale to [-1, 1] ...")
 
     # get dataset
@@ -100,10 +59,6 @@ def train(model_params, train_params, data_params, make_plot: bool = False) -> N
     valid = gan_model.smooth_positive_labels( np.ones((batch_size, 1)) )
     fake = np.zeros((batch_size, 1))
 
-    # valid = torch.from_numpy(valid)
-    # fake = torch.from_numpy(fake)
-
-    # Save losses for each epoch for graphs
     results = {}
 
     # setup tensorboard
@@ -156,13 +111,6 @@ def train(model_params, train_params, data_params, make_plot: bool = False) -> N
         d_total = ( d_real_metrics[1] + d_real_metrics[2] + d_real_metrics[3] + d_real_metrics[4] ) * 2
         d_acc = d_correct / d_total
 
-        # real_count = d_real_metrics[1] + d_real_metrics[2] + d_real_metrics[3] + d_real_metrics[4]
-        # fake_count = d_fake_metrics[1] + d_fake_metrics[2] + d_fake_metrics[3] + d_fake_metrics[4]
-        # fake_samples = gan_model.generate(1)
-        # bad_predict = np.any((fake_samples < -1) | (fake_samples > 1))
-        # if bad_predict:
-        #     print("ERROR: Predictions outside valid range")
-        #     raise
 
         writer.add_scalar('Disc_loss', d_loss, epoch)
         writer.add_scalar('Disc_real_loss', d_loss_real, epoch)

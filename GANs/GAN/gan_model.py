@@ -17,9 +17,6 @@ from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.optimizers import Adam
 from tensorflow import keras
 
-
-# from src.common.utils import PROJECT_ROOT
-
 # os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 class GANModel:
@@ -179,11 +176,7 @@ def main(yaml_file): #cfg: omegaconf.DictConfig):
                      generator_param=params.get("generator_param"))
 
 
-    # model = GANModel()
-    # hydra.utils.instantiate(
-    #     cfg.model.modelmodule,  # calls GANModel above
-    #     _recursive_=False
-    # )
+
     print("Success!") if model else print("Fail!")
 
 

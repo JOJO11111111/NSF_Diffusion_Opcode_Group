@@ -6,6 +6,5 @@ datamodule:
       # winwebsec | zbot | zeroaccess | BHO | VBInject | Renos | OnLineGames
       family: doc_vectors #zeroaccess
       raw_path: data\embeddings\top25_scaled #data/raw
-      # raw_path_tiff: data/embeddings/top25_600_[-1,1]
       raw_path_tiff: data/embeddings/top25_scaled
 

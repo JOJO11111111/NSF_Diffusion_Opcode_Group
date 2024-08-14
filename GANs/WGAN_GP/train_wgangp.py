@@ -19,14 +19,6 @@ import itertools
 
 # os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-# logging.getLogger('git').setLevel(logging.ERROR)
-# logging.getLogger('urllib3').setLevel(logging.ERROR)
-# logging.getLogger('matplotlib').setLevel(logging.ERROR)
-# logging.getLogger('tensorflow').setLevel(logging.ERROR)
-# logging.getLogger('h5py').setLevel(logging.ERROR)
-
-# logger = logging.getLogger(__name__)
-# logger.propagate = False
 
 def train(model_params, train_params, data_params, num_samples,make_plot=False):
     print("Loading dataset ...")
@@ -36,7 +28,7 @@ def train(model_params, train_params, data_params, num_samples,make_plot=False):
 
     print(f'Initializing {model_params.get("model").get("model_name_wgangp")} model ...')
     
-    # instantiate GAN Model
+    # instantiate WGANGP Model
     wgangp_model = WGANGPModel(model=model_params.get("model"),
                                discriminator_param=model_params.get("discriminator_param"),
                                critic_param=model_params.get("critic_param"),

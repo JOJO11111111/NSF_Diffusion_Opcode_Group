@@ -19,9 +19,6 @@ families = [ 'Vobfus', 'Diplugem', 'Obfuscator', 'Vundo', 'VBInject',
 families = ['zbot']
 
 
-# best full families
-
-
 # family sample numbers
 family_to_num = {
     'Delf': 1679,
