@@ -1,6 +1,6 @@
 # NSF_Diffusion_Opcode_Group
 
-The contents of this repo are for the SJSU REU research project. 
+The contents of this repo are for the source code for a SJSU REU research project. 
 
 It consists of three different generative models: GAN, WGAN - GP, and Diffusion.
 
