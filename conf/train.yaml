@@ -1,0 +1,7 @@
+trainer:
+  experiment_name: train_WGANGP_without_BERT # train_WGANGP_with_BERT | train_WGANGP_without_BERT
+  run_name: ${data.datamodule.datasets.train.family}_training_on_hpc
+  epochs: 100001 # 10001
+  batch_size: 32
+  save_interval: 1000 # {GAN: 200, WGANGP: 1000}
+  save_path: models/${model.modelmodule.model.model_name}/${data.datamodule.datasets.train.family}

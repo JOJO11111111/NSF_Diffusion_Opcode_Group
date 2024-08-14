@@ -1,0 +1,42 @@
+modelmodule:
+  _target_: src.model.wgangp_model.WGANGPModel # {GAN: src.model.gan_model.GANModel, WGANGP_top_frequent_opcodes: src.model.wgangp_model.WGANGPModel}
+
+  model:
+    model_name: GAN  # GAN | WGANGP
+    model_name_wgangp: WGANGP
+    latent_dim: 100
+    lr: 0.0001  # {GAN: 0.0003, WGANGP: 0.0001}
+    beta_1: 0.5
+    beta_2: 0.99
+    num_neurons: 600 #100 word2vec # Since output of BERT embeddings is 768
+
+  discriminator_param:
+    d_first_output: 400
+    d_last_output: 1
+    d_alpha: 0.2
+    d_activation: sigmoid
+    d_loss: binary_crossentropy
+    d_metrics: ['accuracy', 'precision', 'recall']
+
+  critic_param:
+    n_critic_usual: 7
+    n_critic: 100
+    c_last_output: 1
+    c_filters: 64
+    c_kernel_size: 3
+    c_alpha: 0.2 #${model.modelmodule.discriminator_param.d_alpha}
+    c_padding: same
+
+  generator_param:
+    g_first_output: 200
+    g_alpha: 0.2 #${model.modelmodule.discriminator_param.d_alpha}
+    g_momentum: 0.8
+    g_activation: tanh
+    g_loss: binary_crossentropy
+    g_metrics: ['accuracy']
+
+    # WGAN-GP param
+    g_filters: 64 #${model.modelmodule.critic_param.c_filters}
+    g_kernel_size: 3 # ${model.modelmodule.critic_param.c_kernel_size}
+    g_padding: same # ${model.modelmodule.critic_param.c_padding}
+
