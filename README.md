@@ -24,3 +24,10 @@ After training, to generate fake samples, run python GANs/WGAN_GP/ExtraFake_wgan
 
 
 ## Diffusion
+torch == 2.0.1
+
+data scale: [0, 1]
+
+To train Diffusion model, run python diffusion/run_model.py
+
+After training, to generate additional samples, run python create_samples.py
