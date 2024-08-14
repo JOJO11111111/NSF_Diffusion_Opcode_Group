@@ -74,7 +74,7 @@ for family in families:
 
     for j in range(1, 51):
         i = j * 200
-        file_folder = "models/WGANGP/save_interval"+family+"_"+str(latent_dim)  
+        file_folder = "models/GAN/save_interval"+family+"_"+str(latent_dim)  
         file_name = ("/size"+str(latent_dim)+
                 "GAN_" +family+"_" + str(i) +".keras")
         file_path = file_folder+file_name

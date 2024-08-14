@@ -20,35 +20,6 @@ families = ['zbot']
 
 
 # best full families
-# best wgangp distinct full families
-best_model = {
-    'Renos': 85,
-    'zbot': 49,
-    'Delf': 50,
-    'VBInject': 21,
-    'DelfInject': 11,
-    'Expiro.BK': 97,
-    'Injector': 86,
-    'Small': 100,
-    'Toga!rfn': 57,
-    'CeeInject': 54,
-    'Obfuscator': 33,
-    'Enterak.A': 94,
-    'Vobfus': 77,
-    'FakeRean': 85,
-    'Startpage': 28,
-    'Allaple.A': 39,
-    'Hotbar': 61,
-    'zeroaccess': 53,
-    'Vundo': 31,
-    'OnLineGames': 77,
-    'Beebone': 89,
-    'winwebsec': 85,
-    'Diplugem': 1,
-    'Systex.A': 1,
-    'Lamechi.B': 1
-}
-
 
 
 # family sample numbers
@@ -81,7 +52,7 @@ family_to_num = {
 }
 
 
-with open("/home/tiffanybao/Diffusion_Opcodes1/Diffusion_Opcodes/Fake_Malware_Generator/conf/model.yaml", 'r') as f:
+with open("conf/model.yaml", 'r') as f:
     model_params = yaml.full_load(f).get("modelmodule")
 
 latent_dim = model_params.get("model").get("latent_dim")
@@ -110,9 +81,7 @@ for family in families:
     
     # generate malware using saved model per1k
     for i in range(1, 101):
-        file_folder = "Fake_Malware_Generator/models/WGAN-GP/save_interval/"+family+"_"+str(latent_dim)
-        # file_folder = "Fake_Malware_Generator/models/WGAN-GP/save_interval/"+family+"_Original/"
-
+        file_folder = "models/WGANGP/save_interval"+family+"_"+str(latent_dim)
 
         file_name = ("/size"+str(latent_dim)+
                 "_critic"+str(model_params.get("critic_param")["n_critic_usual"])+
@@ -120,18 +89,12 @@ for family in families:
                 "_gf"+ str(model_params.get("generator_param")["g_filters"])+
                 "_lr"+ str(model_params.get("model")["lr"])+
             "WGANGP_" +family+"_" + str(i) +"000.h5")
-        # file_name=("OriginalWGANGP_zbot_"+str(i)+"000.h5")
-
 
         file_path = file_folder+file_name
         model = load_model(file_path, compile=True)
-        fake_samples = generate(model,num_samples )
-        # fake_samples = generate(model,2000)
-
+        fake_samples = generate(model,num_samples)
         project_root = Path(os.getcwd())
-        # save_path_folder = os.path.join(project_root, "Fake_Malware_Generator", "data","fake_samples", "WGAN-GP",(family+"_"+str(latent_dim)) )
-        # save_path_folder = os.path.join(project_root, "Fake_Malware_Generator", "WGAN_GP","2000_best_full_family")
-        save_path_folder = os.path.join(project_root, "Fake_Malware_Generator", "data","fake_samples", "WGAN-GP", "5000_samples")
+        save_path_folder = os.path.join(project_root,"data","fake_samples", "WGAN-GP", family)
 
         if not os.path.exists(save_path_folder):
             os.makedirs(save_path_folder)

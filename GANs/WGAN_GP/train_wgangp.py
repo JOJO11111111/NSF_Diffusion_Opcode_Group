@@ -142,27 +142,8 @@ def train(model_params, train_params, data_params, num_samples,make_plot=False):
                             model_params.get("model").get("model_name_wgangp") + '_' +
                             data_params.get("train").get("family") + '_'
                             + str(epoch) + '.h5')
-            
-            # file_name = str(model_params.get("model").get("model_name_wgangp") + '_' +
-            #     data_params.get("train").get("family") + '_'
-            #     + str(epoch) + '.h5')
+
             wgangp_model.generator.save(save_path + '/' + file_name, save_format='h5')
-
-
-    # print('Generating Samples ...')
-    
-    # fake_samples = wgangp_model.generate(num_samples)
-    # save_path_folder = os.path.join(project_root, "data","fake_samples", "WGAN-GP", data_params.get("train").get("family"))
-    
-    # if not os.path.exists(save_path_folder):
-    #     os.makedirs(save_path_folder)
-
-    # save_path = str(data_params.get("train").get("family") + ".csv")
-    # full_save_path = os.path.join(save_path_folder, save_path)
-    
-    # savetxt(full_save_path, fake_samples, delimiter=',')
-
-    # print(f'Finished operation for {data_params.get("train").get("family")}!!')
 
 
 
@@ -213,16 +194,11 @@ def main(yaml_model, yaml_train, yaml_data):
             'Allaple.A', 'Injector', 'Systex.A', 'Expiro.BK', 'FakeRean', 
             'Small', 'Toga!rfn', 'Lamechi.B', 'CeeInject','Beebone',
             'Hotbar', 'DelfInject', 'zbot', 'zeroaccess','Startpage']
-    families = ['zbot']
-
 
     for family in families:
         data_params['train']['family']=family
         num_samples=family_to_num[family]
-        
-    
         train(model_params, train_params, data_params,num_samples,make_plot=False)
-
 
 if __name__ == '__main__':
     main("conf/model.yaml", "conf/train.yaml", "conf/data.yaml")

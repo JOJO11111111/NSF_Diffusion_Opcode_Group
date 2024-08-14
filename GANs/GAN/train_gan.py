@@ -199,41 +199,11 @@ def train(model_params, train_params, data_params, make_plot: bool = False) -> N
     
 
             gan_model.save_model(save_path=save_path, file_name=file_name)
-            # mlflow.log_artifact(local_path=save_path + '/' + file_name)
-    ###########################
-    # end indent for model train start_run
-    ###########################
-
-    # logger.info('Finished training! '
-    #             f'Execution time: {my_timer.get_execution_time()}')
-
-    # if make_plot:
-    #     f_d, ax_d, f_g, ax_g = plot_losses(
-    #         results, cfg.train.trainer.epochs,
-    #         cfg.model.modelmodule.model.model_name
-    #     )
-    #     plt.legend(loc='upper left')
-    #     f_d.savefig(os.path.join(save_path,
-    #                              cfg.model.modelmodule.model.model_name +
-    #                              '_discriminator.png'))
-    #     f_g.savefig(os.path.join(save_path,
-    #                              cfg.model.modelmodule.model.model_name +
-    #                              '_generator.png'))
-    # logger.info('Finished operation!!')
-
-    # print('Generating Samples ...')
-    # fake_samples = gan_model.generate(32)
-    # project_root = Path(os.getcwd())
-    # save_path = os.path.join(project_root,
-    #                                  "GAN", "fake_samples")
-    # save_path = str(save_path + data_params.get("train").get("family") + ".csv")
-    # savetxt(save_path, fake_samples, delimiter=',')
-
+ 
 
     print('Finished operation!!')
 
 
-# @hydra.main(config_path=str(PROJECT_ROOT / 'conf'), config_name='default')
 def main(yaml_model, yaml_train, yaml_data): #cfg: omegaconf.DictConfig):
     # train(cfg, make_plot=True)
     with open(yaml_model, 'r') as f: 
@@ -247,18 +217,14 @@ def main(yaml_model, yaml_train, yaml_data): #cfg: omegaconf.DictConfig):
     data = params.get("datamodule").get("datasets")
 
 
-
-    families = [  'CeeInject','Beebone',
-            'Hotbar', 'DelfInject', 'zeroaccess','Startpage']
     
 
-    # families = ['Delf', 'Diplugem', 'Obfuscator', 'Vundo', 'VBInject',
-    #         'OnLineGames', 'Renos','winwebsec', 'Vobfus',   'Enterak.A', 
-    #         'Allaple.A', 'Injector', 'Systex.A', 'Expiro.BK', 'FakeRean', 
-    #         'Small', 'Toga!rfn', 'Lamechi.B', 'CeeInject','Beebone',
-    #         'Hotbar', 'DelfInject', 'zbot', 'zeroaccess','Startpage']
+    families = ['Delf', 'Diplugem', 'Obfuscator', 'Vundo', 'VBInject',
+            'OnLineGames', 'Renos','winwebsec', 'Vobfus',   'Enterak.A', 
+            'Allaple.A', 'Injector', 'Systex.A', 'Expiro.BK', 'FakeRean', 
+            'Small', 'Toga!rfn', 'Lamechi.B', 'CeeInject','Beebone',
+            'Hotbar', 'DelfInject', 'zbot', 'zeroaccess','Startpage']
 
-    # families = [  'zbot']
 
     for family in families:
         data['train']['family'] = family
@@ -267,12 +233,7 @@ def main(yaml_model, yaml_train, yaml_data): #cfg: omegaconf.DictConfig):
 
 
 if __name__ == '__main__':
-    # logger.propagate = False
-    # logger.info("Num GPUs Available: "
-    #             f"{len(tf.config.list_physical_devices('GPU'))}")
-    # main("conf\\model.yaml", 
-    #      "conf\\train.yaml",
-    #      "conf\\data.yaml")
+
     main("conf/model.yaml", 
          "conf/train.yaml",
          "conf/data.yaml")
