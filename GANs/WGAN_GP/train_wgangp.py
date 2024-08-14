@@ -10,7 +10,7 @@ from tensorboardX import SummaryWriter
 from tqdm import tqdm
 from pathlib import Path
 from data.data_module import MyDataModule
-from model.wgangp_model import WGANGPModel
+from GANs.WGAN_GP.wgangp_model import WGANGPModel
 from numpy import savetxt
 import numpy as np
 import itertools

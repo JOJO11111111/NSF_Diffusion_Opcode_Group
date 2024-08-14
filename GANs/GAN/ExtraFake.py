@@ -14,7 +14,6 @@ families = [ 'Vobfus', 'Diplugem', 'Obfuscator', 'Vundo', 'VBInject',
             'Allaple.A', 'Injector', 'Systex.A', 'Expiro.BK', 'FakeRean', 
             'Small', 'Toga!rfn', 'Lamechi.B', 'CeeInject','Beebone',
             'Hotbar', 'DelfInject', 'zbot', 'zeroaccess','Startpage']
-# families = ['zbot']
 # family sample numbers
 family_to_num = {
     'Delf': 1679,
@@ -45,36 +44,8 @@ family_to_num = {
 }
 
 
-# best gan full familes
-best_model = {
-    'Allaple.A': 10000,
-    'Delf': 4000,
-    'Diplugem': 200,
-    'Enterak.A': 9200,
-    'Obfuscator': 9200,
-    'OnLineGames': 7600,
-    'Renos': 9400,
-    'VBInject': 9200,
-    'Vobfus': 4600,
-    'Vundo': 9800,
-    'winwebsec': 8200,
-    'zbot': 10000,
-    'zeroaccess': 3600,
-    'Startpage': 6000,
-    'DelfInject': 9800,
-    'Hotbar': 8800,
-    'Beebone': 8400,
-    'CeeInject': 9200,
-    'Lamechi.B': 200,
-    'Toga!rfn': 8800,
-    'Small': 9000,
-    'FakeRean': 7000,
-    'Expiro.BK': 9400,
-    'Systex.A': 200,
-    'Injector':6400
-    }
 
-with open("/home/tiffanybao/Diffusion_Opcodes1/Diffusion_Opcodes/Fake_Malware_Generator/conf/model.yaml", 'r') as f:
+with open("conf/model.yaml", 'r') as f:
     model_params = yaml.full_load(f).get("modelmodule")
 
 latent_dim = model_params.get("model").get("latent_dim")
@@ -98,15 +69,12 @@ def generate(model, batch_size) -> np.ndarray:
 
 for family in families:
     num_samples=family_to_num[family]
-    
-    # num_samples=2000
-    # i= best_model[family]
 
     print("family is: "+family + "generating samples: " + str(num_samples))
 
     for j in range(1, 51):
         i = j * 200
-        file_folder = "Fake_Malware_Generator/models/GAN/save_interval/"+family+"_"+str(latent_dim)  
+        file_folder = "models/WGANGP/save_interval"+family+"_"+str(latent_dim)  
         file_name = ("/size"+str(latent_dim)+
                 "GAN_" +family+"_" + str(i) +".keras")
         file_path = file_folder+file_name
@@ -115,7 +83,7 @@ for family in families:
 
         project_root = Path(os.getcwd())
 
-        save_path_folder = os.path.join(project_root, "Fake_Malware_Generator", "data","fake_samples", "GAN_reproduce","2000_best_full_family" )
+        save_path_folder = os.path.join(project_root, "data","fake_samples", "GAN",family)
         if not os.path.exists(save_path_folder):
             os.makedirs(save_path_folder)
         

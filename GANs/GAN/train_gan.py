@@ -30,7 +30,8 @@ from numpy import savetxt
 
 # from src.common.utils import PROJECT_ROOT, MyTimer
 from data.data_module import MyDataModule
-from model.gan_model import GANModel
+from GANs.GAN.gan_model import GANModel
+
 # from src.visualization.visualization import plot_losses
 
 # logging.getLogger('git').setLevel(logging.ERROR)
