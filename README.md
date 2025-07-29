@@ -1,4 +1,6 @@
-# NSF_Diffusion_Opcode_Group
+# Generating Synthetic Malware Samples Using Generative AI
+
+Official Implementation of our IEEE Access Paper: [Generating Synthetic Malware Samples Using Generative AI](https://ieeexplore.ieee.org/abstract/document/10947040)
 
 The contents of this repo are for the source code for a SJSU REU research project. 
 
