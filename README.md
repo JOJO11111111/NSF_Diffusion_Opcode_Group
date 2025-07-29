@@ -1,6 +1,6 @@
 # Generating Synthetic Malware Samples Using Generative AI
 
-Official Implementation of our IEEE Access Paper: [Generating Synthetic Malware Samples Using Generative AI](https://ieeexplore.ieee.org/abstract/document/10947040)
+Official Implementation of our IEEE Access Paper: [Generating Synthetic Malware Samples Using Generative AI](https://ieeexplore.ieee.org/abstract/document/10947040). In this paper, we propose a new system for generating synthetic malware samples to augment imbalanced malware datasets. Our approach decomposes malware binary samples into mnemonic opcode sequences, leveraging natural language processing to extract contextual meaning behind malware opcode features to aid the learning of generative AI (GenAI) models employed in this paper: Generative Adversarial Networks (GAN), Wasserstein Generative Adversarial Networks with Gradient Penalty (WGAN-GP), and a modified Diffusion model.
 
 The contents of this repo are for the source code for a SJSU REU research project. 
 
@@ -31,7 +31,7 @@ After training, to generate fake samples, run python GANs/WGAN_GP/ExtraFake_wgan
 ## Diffusion
 torch == 2.0.1
 
-data scale: [0, 1]
+data scale: [-1, 1]
 
 To train Diffusion model, run python diffusion/run_model.py
 
